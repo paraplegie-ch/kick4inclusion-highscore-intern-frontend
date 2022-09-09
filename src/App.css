@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  color: white;
+  background-color: #202124;
+  min-height: 100vh;
+}
+
+.score-table {
+  width: 700px;
 }
 
 .App-logo {
