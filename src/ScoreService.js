@@ -1,4 +1,4 @@
 export function getScores() {
-    return fetch('https://play4inclusion.lockandload.ch/score')
+    return fetch('http://localhost:3000/score')
         .then((response) => response.json());
 }

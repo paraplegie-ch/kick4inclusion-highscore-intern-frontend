@@ -17,15 +17,15 @@ function App() {
         for(let i in scores) {
             let score = scores[i];
 
-            renderedEntries.push(<TableEntry key={i} place={parseInt(i)+1} gametag={score.GAMETAG} score={score.SCORE}/>);
+            renderedEntries.push(<TableEntry key={i} place={parseInt(i)+1} name={score.NAME} mail={score.MAIL} score={score.SCORE}/>);
         }
         return renderedEntries;
     }
 
   return (
     <div className="App">
-        <h1>Score Table</h1>
-        <h3>Play4Inclusion LaL Turnier</h3>
+        <h1>Rangliste</h1>
+        <h3>Kick4Inclusion Mitarbeiterturnier</h3>
         <p>Präsentiert von der Schweizer Paraplegiker Stiftung</p>
       <div className={"score-table"}>
 
@@ -38,8 +38,9 @@ function App() {
             <thead>
             <tr>
               <th>#</th>
-              <th>Gametag (Nick)</th>
               <th>Score</th>
+              <th>Mail</th>
+              <th>Name</th>
             </tr>
             </thead>
             <tbody>
@@ -55,41 +56,12 @@ function App() {
 
 function TableEntry (props) {
 
-    function formatTime(time) {
-        let timeInt = parseInt(time);
-        let milliseconds = timeInt % 1000;
-        let seconds = Math.floor(timeInt / 1000) % 60;
-        let minutes = Math.floor(timeInt / 60000) % 60;
-
-        let millisecondsString = "";
-        if(milliseconds < 100) {
-            millisecondsString += "0";
-        }
-        if(milliseconds < 10) {
-            millisecondsString += "0";
-        }
-        millisecondsString += milliseconds;
-
-        let secondsString = "";
-        if(seconds < 10) {
-            secondsString += "0";
-        }
-        secondsString += seconds;
-
-        let minutesString = "";
-        if(minutes < 10) {
-            minutesString += "0";
-        }
-        minutesString += minutes;
-
-        return minutesString + ":" + secondsString + "." + millisecondsString;
-    }
-
   return (
       <tr>
         <td>{props.place}</td>
-        <td>{props.gametag}</td>
-        <td>{formatTime(props.score)}</td>
+        <td>{props.score}</td>
+        <td>{props.mail}</td>
+        <td>{props.name}</td>
       </tr>
       )
 
