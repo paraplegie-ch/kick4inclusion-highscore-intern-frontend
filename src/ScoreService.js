@@ -1,4 +1,4 @@
 export function getScores() {
-    return fetch('http://localhost:3000/score')
+    return fetch(process.env.REACT_APP_BACKEND_URL)
         .then((response) => response.json());
 }

@@ -17,7 +17,7 @@ function App() {
         for(let i in scores) {
             let score = scores[i];
 
-            renderedEntries.push(<TableEntry key={i} place={parseInt(i)+1} name={score.NAME} mail={score.MAIL} score={score.SCORE}/>);
+            renderedEntries.push(<TableEntry key={i} place={parseInt(i)+1} name={score.NAME} score={score.SCORE}/>);
         }
         return renderedEntries;
     }
@@ -39,7 +39,6 @@ function App() {
             <tr>
               <th>#</th>
               <th>Score</th>
-              <th>Mail</th>
               <th>Name</th>
             </tr>
             </thead>
@@ -60,7 +59,6 @@ function TableEntry (props) {
       <tr>
         <td>{props.place}</td>
         <td>{props.score}</td>
-        <td>{props.mail}</td>
         <td>{props.name}</td>
       </tr>
       )
