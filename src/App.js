@@ -7,19 +7,32 @@ import {getScores} from "./ScoreService";
 function App() {
 
   const [scores, setScores] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-      getScores().then((scores) => setScores(scores));
+      getScores().then((scores) => {setScores(scores); setIsLoading(false)});
   }, [])
 
     function renderEntires() {
-        let renderedEntries = [];
-        for(let i in scores) {
-            let score = scores[i];
+      if(scores.length !== 0) {
+          let renderedEntries = [];
+          for(let i in scores) {
+              let score = scores[i];
 
-            renderedEntries.push(<TableEntry key={i} place={parseInt(i)+1} name={score.NAME} score={score.SCORE}/>);
+              renderedEntries.push(<TableEntry key={i} place={parseInt(i)+1} name={score.NAME} score={score.SCORE}/>);
+          }
+          return (
+              <tbody>
+              {renderedEntries}
+              </tbody>
+          );
+      }
+    }
+
+    function renderNoEntries() {
+        if(scores.length === 0) {
+            return 'Keine Einträge vorhanden';
         }
-        return renderedEntries;
     }
 
   return (
@@ -29,23 +42,24 @@ function App() {
         <p>Präsentiert von der Schweizer Paraplegiker Stiftung</p>
       <div className={"score-table"}>
 
-        {scores.length === 0 ?
+        {isLoading ?
             <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
             </Spinner>
             :
-          <Table striped bordered hover variant={"dark"}>
-            <thead>
-            <tr>
-              <th>#</th>
-              <th>Score</th>
-              <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            {renderEntires()}
-            </tbody>
-          </Table>
+            <>
+              <Table striped bordered hover variant={"dark"}>
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Score</th>
+                  <th>Name</th>
+                </tr>
+                </thead>
+                {renderEntires()}
+              </Table>
+              {renderNoEntries()}
+            </>
         }
 
       </div>
